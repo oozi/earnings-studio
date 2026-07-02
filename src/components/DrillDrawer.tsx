@@ -125,8 +125,6 @@ export function DrillDrawer({ cube, ctx, onClose, onOpenVariance, onOpenEvolutio
       </button>
     ) : null;
 
-  const favorable = (delta: number, contra: boolean) => (delta >= 0) !== contra;
-
   return (
     <div className="drawer">
       <div className="drawer-head">
@@ -229,8 +227,7 @@ export function DrillDrawer({ cube, ctx, onClose, onOpenVariance, onOpenEvolutio
           </div>
           <div className="movers">
             {movers.map((mv) => {
-              const contra = c.dim === 'metric' ? mv.node.contra : c.m.contra;
-              const fav = favorable(mv.delta, contra);
+              const fav = mv.delta >= 0; // signed values: +Δ always lifts the number under inspection
               return (
                 <div key={mv.node.id} className="mover-row" title={mv.node.path}>
                   <span className="bar-name">{mv.node.short}</span>

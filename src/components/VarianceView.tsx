@@ -273,8 +273,8 @@ export function VarianceView({ cube, request }: Props) {
                   </thead>
                   <tbody>
                     {wf.steps.map((s) => {
-                      const contra = dim === 'metric' ? s.node.contra : m.contra;
-                      const fav = (s.delta >= 0) !== contra;
+                      // Values are signed (expenses negative), so +Δ always lifts the total.
+                      const fav = s.delta >= 0;
                       return (
                         <tr key={s.node.id}>
                           <td>
@@ -303,8 +303,7 @@ export function VarianceView({ cube, request }: Props) {
                 <h4 className="tbl-title">Top fund / leaf movers</h4>
                 <div className="movers">
                   {movers.map((mv) => {
-                    const contra = dim === 'metric' ? mv.node.contra : m.contra;
-                    const fav = (mv.delta >= 0) !== contra;
+                    const fav = mv.delta >= 0;
                     return (
                       <div key={mv.node.id} className="mover-row" title={mv.node.path}>
                         <span className="bar-name">{mv.node.short}</span>

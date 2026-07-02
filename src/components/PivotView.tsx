@@ -329,7 +329,8 @@ export function PivotView({ cube, onOpenVariance, onOpenEvolution }: Props) {
                       if (compareV !== null && display === 'val') {
                         const ref = valueAt({ kind: 'vintage', v: compareV }, r.node, c.qs, true);
                         const dv = v === null || ref === null ? null : v - ref;
-                        const fav = dv === null ? null : (dv >= 0) !== r.node.contra;
+                        // Values are signed (expenses negative), so +Δ always lifts DE.
+                        const fav = dv === null ? null : dv >= 0;
                         cmp = (
                           <div className={`cellcmp ${fav === null ? '' : fav ? 'pos' : 'neg'}`}>
                             {dv === null ? '·' : fmtDelta(dv, 0)}
