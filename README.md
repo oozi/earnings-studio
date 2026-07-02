@@ -6,6 +6,12 @@ with pivoting, drill-down, variance waterfalls and forecast-evolution analysis.
 
 **All data is synthetic** (seeded generator, nothing real).
 
+**Re-implementing or borrowing from this UI?** Read [`UI-SPEC.md`](UI-SPEC.md) — a complete
+functional specification of every view and interaction (cell-level rendering rules, hover/click
+behavior, chart encodings, cross-view navigation payloads, formatting and favorability
+conventions), written so the behavior can be rebuilt on a different stack and treated as
+acceptance criteria.
+
 ## Run it
 
 - **Zero-install:** double-click `dist/index.html` — the whole app is inlined
